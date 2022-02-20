@@ -1,0 +1,59 @@
+﻿@model TPPweb2122.Models.Imovel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container p-2 rounded" style="background-color:white;">
+<h1>Criar Novo Imóvel</h1>
+
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeAlojamento" class="control-label">Nome do Alojamento</label>
+                <input asp-for="NomeAlojamento" class="form-control" />
+                <span asp-validation-for="NomeAlojamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Localizacao" class="control-label">Localização</label>
+                <input asp-for="Localizacao" class="form-control" />
+                <span asp-validation-for="Localizacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label">Descrição</label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preco" class="control-label">Preço</label>
+                <input asp-for="Preco" class="form-control" />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dataInicio" class="control-label">Data Inicial</label>
+                <input asp-for="dataInicio" class="form-control" />
+                <span asp-validation-for="dataInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dataFinal" class="control-label">Data Final</label>
+                <input asp-for="dataFinal" class="form-control" />
+                <span asp-validation-for="dataFinal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoriaId" class="control-label">Categoria</label>
+                <select asp-for="CategoriaId" class ="form-control" asp-items="ViewBag.CategoriaId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-success" />
+            </div>
+        </form>
+         <a class="btn btn-primary"asp-action="Index">Voltar a lista</a>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TPPweb2122.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Categorias";
+}
+<div class="container p-2 rounded" style="background-color:white;">
+
+<h1>Categorias</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Criar Nova Categoria</a>
+</p>
+<div class="m-2 table-responsive">
+
+    <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Categoria
+            </th>
+            
+            <th>Ações
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCategoria)
+            </td>
+
+            <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.CategoriaId">Editar</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CategoriaId">Apagar</a>
+                    }
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</div>

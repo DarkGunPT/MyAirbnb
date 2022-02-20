@@ -1,0 +1,68 @@
+﻿@model TPPweb2122.Models.Imovel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class ="container p-2 rounded" style="background-color:white">
+    <div>
+   
+     <h1>Detalhes</h1>
+    <hr />
+   
+    <dl class="row">
+        <dt class = "col-sm-3">
+           Nome do Alojamento
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.NomeAlojamento)
+        </dd>
+        <dt class = "col-sm-3">
+            Localização
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Localizacao)
+        </dd>
+        <dt class = "col-sm-3">
+          Descrição
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class = "col-sm-3">
+           Preço
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Preco)
+        </dd>
+        <dt class = "col-sm-3">
+           Data de Início
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.dataInicio)
+        </dd>
+        <dt class = "col-sm-3">
+            Data de Fim
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.dataFinal)
+        </dd>
+        <dt class = "col-sm-3">
+          Categoria
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Categoria.NomeCategoria)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("Gestor") || User.IsInRole("Funcionario") || User.IsInRole("Admin"))
+   {
+       <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.ImovelId">Editar Imóvel</a>
+   }
+    
+    <a class="btn btn-primary" asp-action="Index">Voltar a lista</a>
+</div>
+</div>
+
+
+

@@ -1,0 +1,86 @@
+﻿@model TPPweb2122.ViewModels.GestorViewModel
+
+@{
+    ViewData["Title"] = "Index";
+     var dados = (IPagedList)Model.Gestores;
+}
+
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+<link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+
+<div class="container-fluid w-75 p-3 rounded" style="background-color:white">
+    <h1>Gestores</h1>
+
+<div class="m-2 table-responsive">
+    <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Morada
+            </th>
+            <th>
+              Telefone
+            </th>
+            <th>
+                UserName
+            </th>
+           
+            <th>
+               Email
+            </th>
+            <th>Ações</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Gestores) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Morada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+          
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Editar</a> 
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> 
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+</div>
+<div>
+        @(Html.Pager(dados)
+        .Url(page => Url.Action("Index", new { page = page }))
+        .DisplayLinkToFirstPage(PagedListDisplayMode.IfNeeded)
+        .DisplayLinkToLastPage(PagedListDisplayMode.IfNeeded)
+        .Build())
+    </div>
+
+</div>
+
+

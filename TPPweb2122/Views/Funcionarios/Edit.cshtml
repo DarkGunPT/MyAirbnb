@@ -1,0 +1,60 @@
+﻿@model TPPweb2122.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="container p-2 rounded" style="background-color:white;">
+
+<h1>Edit</h1>
+
+<h4>Funcionario</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Morada" class="control-label"></label>
+                <input asp-for="Morada" class="form-control" />
+                <span asp-validation-for="Morada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Email" />
+            <input type="hidden" asp-for="UserName" />
+            <input type="hidden" asp-for="NormalizedUserName" />
+            <input type="hidden" asp-for="NormalizedEmail" />
+            <input type="hidden" asp-for="EmailConfirmed" />
+            <input type="hidden" asp-for="PasswordHash" />
+            <input type="hidden" asp-for="SecurityStamp" />
+            <input type="hidden" asp-for="ConcurrencyStamp" />
+            <input type="hidden" asp-for="PhoneNumber" />
+            <input type="hidden" asp-for="PhoneNumberConfirmed" />
+            <input type="hidden" asp-for="TwoFactorEnabled" />
+            <input type="hidden" asp-for="LockoutEnd" />
+            <input type="hidden" asp-for="LockoutEnabled" />
+            <input type="hidden" asp-for="AccessFailedCount" />
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="gestorId" />
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary"asp-action="Index">Voltar à lista</a>
+</div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

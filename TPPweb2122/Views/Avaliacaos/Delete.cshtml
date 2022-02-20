@@ -1,0 +1,42 @@
+﻿@model TPPweb2122.Models.Avaliacao
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="container p-2 rounded" style="background-color:white;">
+
+<h1>Apagar avaliação</h1>
+
+<h3>Tem a certeza que seja apagar esta avaliação?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Pontuação
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PontuacaoAvaliacao)
+        </dd>
+        <dt class = "col-sm-2">
+            Comentário
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DescricaoAvaliacao)
+        </dd>
+        <dt class = "col-sm-2">
+           Imóvel
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Imovel.NomeAlojamento)
+        </dd class>
+        
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="AvaliacaoId" />
+        <input type="submit" value="Apagar" class="btn btn-danger" /> |
+        <a class="btn btn-primary" asp-action="Index">Voltar à lista</a>
+    </form>
+</div>
+
+</div>

@@ -1,0 +1,118 @@
+﻿@*model IEnumerable<TPPweb2122.Models.Imovel>*@
+@model TPPweb2122.ViewModels.ImoveisViewModel
+
+
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+
+@{
+    ViewData["Title"] = "Apartamentos";
+    var dados = (IPagedList)Model.Imoveis;
+}
+<link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
+<div class="container-fluid w-75 p-3 rounded" style="background-color:white;"> 
+    
+<h1>Apartamentos</h1>
+
+<p>
+    @if (User.IsInRole("Gestor"))
+    {
+        <a class="btn btn-primary" asp-controller="Imovels" asp-action="Create">Criar novo Imovel</a>
+        <a class="btn btn-primary" asp-controller="Reservas" asp-action="Index">Ver Reservas</a>
+    }else if(User.IsInRole("Cliente")){
+        <a class="btn btn-primary" asp-controller="Reservas" asp-action="Create">Reservar</a>
+    }
+</p>
+<div class="m-2 table-responsive">
+    <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+               Nome
+            </th>
+            <th>
+                Localização
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+               Preço
+            <th>
+                Data de Entrada
+            </th>
+            <th>
+                Data de Saída
+            </th>
+            <th>
+              Categoria
+            </th>
+            <th>
+                Gestor
+            </th>
+                        <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Imoveis) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeAlojamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Localizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.NomeCategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gestorId)
+            </td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Gestor") || User.IsInRole("Funcionario"))
+                    {
+                        <td >
+                            <a class="btn btn-primary m-1" asp-action="Edit" asp-route-id="@item.ImovelId">Editar</a> 
+                            <a class="btn btn-info m-1" asp-action="Details" asp-route-id="@item.ImovelId">Detalhes</a> 
+                            <a class="btn btn-danger m-1" asp-action="Delete" asp-route-id="@item.ImovelId">Apagar</a>
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ImovelId">Detalhes</a> 
+                        </td>
+                    }
+
+            
+        </tr>
+}
+    </tbody>
+</table>
+
+</div>
+
+    <div>
+        @(Html.Pager(dados)
+        .Url(page => Url.Action("Index", new { page = page }))
+        .DisplayLinkToFirstPage(PagedListDisplayMode.IfNeeded)
+        .DisplayLinkToLastPage(PagedListDisplayMode.IfNeeded)
+        .Build())
+    </div>
+
+</div>
